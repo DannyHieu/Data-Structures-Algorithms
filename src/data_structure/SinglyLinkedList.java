@@ -74,7 +74,15 @@ public class SinglyLinkedList {
 
     }
 
+    private void deleteFirst() {
+        if (head == null) return;
 
+        ListNode temp = head;
+        head = head.next;
+        temp.next = null;
+
+//        return temp;
+    }
 
 
     public static void main(String[] args) {
@@ -99,6 +107,9 @@ public class SinglyLinkedList {
         sll.display();
 
         sll.insertAt(20, 3);
+        sll.display();
+
+        sll.deleteFirst();
         sll.display();
     }
 }
