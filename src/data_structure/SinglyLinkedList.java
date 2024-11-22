@@ -3,29 +3,102 @@ package data_structure;
 
 public class SinglyLinkedList {
 
-    private ListNote head;
+    private ListNode head;
 
-    private static class ListNote{
+    private static class ListNode{
         private int data;
-        private ListNote next;
+        private ListNode next;
 
-        public ListNote(int data) {
+        public ListNode(int data) {
             this.data = data;
             this.next = null;
         }
     }
 
+    private void display() {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    private int length() {
+        if (head == null) return 0;
+        int count = 0;
+        ListNode current = head;
+
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    private void insertFirst(int value) {
+        ListNode newNode = new ListNode(value);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    private void insertLast(int value) {
+        ListNode newNode = new ListNode(value);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        ListNode current = head;
+        while (current.next != null) {
+             current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    private void insertAt(int value, int position) {
+        ListNode node = new ListNode(value);
+        if (position == 1) {
+            node.next = head;
+            head = node;
+        } else {
+            ListNode previous = head;
+            int count = 1;
+            while (count < position -1){
+                previous = previous.next;
+                count++;
+            }
+            ListNode current = previous.next;
+            node.next = current;
+            previous.next = node;
+        }
+
+    }
+
+
+
+
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
-        sll.head = new ListNote(10);
-        ListNote second = new ListNote(2);
-        ListNote third = new ListNote(8);
-        ListNote fourth = new ListNote(32);
+        sll.head = new ListNode(10);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(8);
+        ListNode fourth = new ListNode(32);
 
         //kết nối note
         sll.head.next = second;
         second.next = third;
         third.next = fourth;
 
+        sll.display();
+//        System.out.println(sll.length());
+
+        sll.insertFirst(11);
+        sll.display();
+
+        sll.insertLast(4);
+        sll.display();
+
+        sll.insertAt(20, 3);
+        sll.display();
     }
 }
