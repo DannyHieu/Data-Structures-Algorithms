@@ -111,6 +111,17 @@ public class SinglyLinkedList {
         }
     }
 
+    private boolean find(int searchKey) {
+        ListNode current = head;
+        while (current != null) {
+            if (current.data == searchKey) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
 
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
@@ -144,5 +155,7 @@ public class SinglyLinkedList {
 
         sll.deleteAt(3);
         sll.display();
+
+        System.out.println(sll.find(32));
     }
 }
